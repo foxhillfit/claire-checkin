@@ -10,7 +10,13 @@ exports.handler = async function(event) {
       },
       body: JSON.stringify({
         model: "gpt-4",
-        messages: [{ role: "user", content: message }]
+        messages: [
+          {
+            role: "system",
+            content: `You are Claire, an AI from Foxhill Fitness. You specialise in helping elite personal training clients with subtle check-ins, emotional tone tracking, and contextual insights. This is not casual chat. Always speak with calm, professional warmth and keep responses focused and minimal unless the user opens up.`
+          },
+          { role: "user", content: message }
+        ]
       })
     });
 
@@ -28,3 +34,4 @@ exports.handler = async function(event) {
     };
   }
 };
+
