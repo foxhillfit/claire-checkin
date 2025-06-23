@@ -60,18 +60,25 @@ function App() {
       </div>
 
       <textarea
-        rows="3"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        placeholder="Type here..."
-        style={{
-          width: '100%',
-          padding: '0.5rem',
-          fontSize: '1rem',
-          borderRadius: '6px',
-          border: '1px solid #ccc'
-        }}
-      />
+  rows="3"
+  value={message}
+  onChange={(e) => setMessage(e.target.value)}
+  onKeyDown={(e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  }}
+  placeholder="Type here..."
+  style={{
+    width: '100%',
+    padding: '0.5rem',
+    fontSize: '1rem',
+    borderRadius: '6px',
+    border: '1px solid #ccc'
+  }}
+/>
+
       <button
         onClick={sendMessage}
         disabled={loading}
