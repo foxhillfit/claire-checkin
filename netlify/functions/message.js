@@ -1,13 +1,13 @@
-import fs from 'fs';
-import path from 'path';
-import { Configuration, OpenAIApi } from 'openai';
+const fs = require('fs');
+const path = require('path');
+const { Configuration, OpenAIApi } = require('openai');
 
 const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY, // Replace with direct key if needed for local testing
+  apiKey: process.env.OPENAI_API_KEY,
 });
 const openai = new OpenAIApi(configuration);
 
-export const handler = async (event) => {
+exports.handler = async (event) => {
   const memoryDir = path.join(__dirname, 'memory');
   const userFile = path.join(memoryDir, 'default_user.json');
 
