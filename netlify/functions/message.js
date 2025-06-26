@@ -1,11 +1,10 @@
 const fs = require('fs');
 const path = require('path');
-const { Configuration, OpenAIApi } = require('openai');
+const { OpenAI } = require('openai');
 
-const configuration = new Configuration({
+const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
-const openai = new OpenAIApi(configuration);
 
 exports.handler = async (event) => {
   const memoryDir = path.join(__dirname, 'memory');
@@ -82,12 +81,12 @@ ${(lowEnergyCount >= 4 || highStressCount >= 4) ? 'Important: 4+ check-ins showe
     },
   ];
 
-  const completion = await openai.createChatCompletion({
+  const completion = await openai.chat.completions.create({
     model: 'gpt-4o',
     messages: messages,
   });
 
-  const assistantReply = completion.data.choices[0].message.content;
+  const assistantReply = completion.choices[0].message.content;
 
   const newLog = {
     date: today,
